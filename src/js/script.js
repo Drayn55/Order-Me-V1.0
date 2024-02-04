@@ -13,3 +13,28 @@ window.onscroll = function () {
         // tombolmini.classList.remove('mini-tombol');
     }
 };
+
+
+// seacrh
+var searchInput = document.getElementsByClassName('input-google')[0];
+searchInput.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+        performSearch();
+    }
+});
+
+function forceString(input) {
+    return String(input);
+}
+
+function sanitizeInput(input) {
+    var stringInput = forceString(input);
+    var sanitizedInput = stringInput.replace(/[^a-zA-Z0-9 ]/g, '');
+    return sanitizedInput;
+}
+
+function performSearch() {
+    var searchTerms = document.getElementsByClassName('input-google')[0].value;
+    var sanitizedSearchTerms = sanitizeInput(searchTerms);
+    window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(sanitizedSearchTerms);
+}
